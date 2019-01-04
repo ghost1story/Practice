@@ -11,7 +11,7 @@ public class FindPartiallySortedMatrix {
         int col = cols - 1;
         while (row < rows && col >= 0) {
             if (n[row][col] == find) {
-                res = true;
+                return true;
             } else if (n[row][col] > find) {
                 col--;
             } else {
@@ -19,5 +19,10 @@ public class FindPartiallySortedMatrix {
             }
         }
         return res;
+    }
+    
+    public static void main(String[] args) {
+        int[][] n = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+        System.out.println(new FindPartiallySortedMatrix().isExist(n, 5));
     }
 }
