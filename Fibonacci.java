@@ -1,28 +1,20 @@
 public class Fibonacci {
 
-    int[] cache;
-
     private int fibonacci(int n) {
-        cache = new int[n];
-        return get(n - 1) + get(n - 2);
+        if (n <= 1) {
+            return n;
+        }
+        int pre1 = 1;
+        int pre2 = 0;
+        int res = 0;
+        for (int i = 2; i <= n; i++) {
+            res = pre1 + pre2;
+            pre2 = pre1;
+            pre1 = res;
+        }
+        return res;
     }
-
-    private int get(int index) {
-        if (index == 1) {
-            cache[index] = 0;
-            return cache[index];
-        }
-        if (index == 2) {
-            cache[index] = 1;
-            return cache[index];
-        }
-        if (cache[index] == 0) {
-            return get(index - 1) + get(index - 2);
-        } else {
-            return cache[index];
-        }
-    }
-
+    
     public static void main(String[] args) {
         System.out.println(new Fibonacci().fibonacci(5));
     }
