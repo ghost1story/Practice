@@ -1,31 +1,47 @@
 public class DeleteNodeInList {
 
-    private void deleteNode(ListNode head, ListNode deleted) {
-        // 被删除的不在当前链表中
-        if (!isExist(head, deleted)) {
-            return;
+    private ListNode deleteNode(ListNode head, ListNode deleted) {
+        if (head == null || deleted == null) {
+            return null;
         }
-        // 被删除的是头部
-        if () {}
-        // 被删除的尾部
-        if () {}
-        // 被删除的在中间
-        ListNode start = head;
-        ListNode mid = start.next;
-        ListNode end = mid.next;
-        while (mid != deleted) {
-            start = mid;
-            mid = end;
-            end = end.next;
+        if (deleted.next != null) {
+            ListNode node = deleted.next;
+            deleted.val = node.val;
+            deleted.next = node.next;
+        } else if (head.val == deleted.val) {
+            deleted = null;
+            head = null;
+        } else {
+            while (head.next != deleted) {
+                head = head.next;
+            }
+            head.next = null;
         }
-        start.next = end;
-        mid.next = null;
+        return head;
     }
 
-    private boolean isExist(ListNode head, ListNode aim) {
-        while (head.val != aim.val && head.next != null) {
-            head = head.next;
+    public static void main(String[] args) {
+        ListNode l = new ListNode(3);
+        ListNode l2 = new ListNode(4);
+        ListNode l3 = new ListNode(5);
+        l.next = l2;
+        l2.next = l3;
+
+        DeleteNodeInList d = new DeleteNodeInList();
+        d.deleteNode(l, l);
+        while (l != null) {
+            System.out.println(l.val);
+            l = l.next;
         }
-        return head.next == null ? false : true;
+    }
+}
+
+class ListNode {
+
+    int val;
+    ListNode next;
+
+    public ListNode(int val) {
+        this.val = val;
     }
 }
