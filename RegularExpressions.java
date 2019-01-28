@@ -8,14 +8,14 @@ public class RegularExpressions {
     }
 
     private boolean match(char[] s, char[] pattern, int i, int j) {
-        if (i == s.length && j == pattern.length) {
+        if (i == s.length && j >= pattern.length) {
             return true;
         }
-        if (i != s.length && j == pattern.length) {
+        if (i != s.length && j >= pattern.length) {
             return false;
         }
-        if (pattern[j + 1] == '*') {
-            if (s[i] == pattern[j] || (pattern[j] == '.' && s[i] != ' ')) {
+        if (j < pattern.length - 1 && pattern[j + 1] == '*') {
+            if (i <= s.length - 1 && (s[i] == pattern[j] || (pattern[j] == '.' && s[i] != ' '))) {
                 return match(s, pattern, i + 1, j) || match(s, pattern, i + 1, j + 2)
                     || match(s, pattern, i, j);
             } else {
@@ -35,6 +35,7 @@ public class RegularExpressions {
         char[] c4 = ".*".toCharArray();
         char[] c5 = "ab*".toCharArray();
         char[] c6 = "a*b*".toCharArray();
+        char[] c7 = "ab*ac*a".toCharArray();
 
         RegularExpressions r = new RegularExpressions();
         System.out.println(r.match(c, c2));
@@ -42,5 +43,6 @@ public class RegularExpressions {
         System.out.println(r.match(c, c4));
         System.out.println(r.match(c, c5));
         System.out.println(r.match(c, c6));
+        System.out.println(r.match(c, c7));
     }
 }
