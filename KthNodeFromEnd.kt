@@ -35,6 +35,4 @@ fun main(args: Array<String>) {
     println(getEnd(null, 0))
 }
 
-class ListNode(var value: Int) {
-    var next: ListNode? = null
-}
+class ListNode(var value: Int, var next: ListNode? = null) {}
