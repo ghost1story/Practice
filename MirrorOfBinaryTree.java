@@ -1,6 +1,8 @@
+import java.util.Stack;
+
 public class MirrorOfBinaryTree {
 
-    void mirror(BinaryTree parent) {
+    /* void mirror(BinaryTree parent) {
         if (parent == null) {
             return;
         }
@@ -13,6 +15,26 @@ public class MirrorOfBinaryTree {
         temp = parent.left;
         parent.left = parent.right;
         parent.right = temp;
+    } */
+
+    void mirror(BinaryTree parent) {
+        if (parent == null) {
+            return;
+        }
+        Stack<BinaryTree> s = new Stack<>();
+        s.push(parent);
+        while (!s.empty()) {
+            BinaryTree root = s.pop();
+            BinaryTree temp = root.left;
+            root.left = root.right;
+            root.right = temp;
+            if (root.left != null) {
+                s.push(root.left);
+            }
+            if (root.right != null) {
+                s.push(root.right);
+            }
+        }
     }
 
     static void connectBT(BinaryTree root, BinaryTree left, BinaryTree right) {
