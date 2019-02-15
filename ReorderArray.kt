@@ -21,9 +21,7 @@ fun printNum(n: IntArray) {
     for (i in n) {
         println(i)
     }
-    /* n.forEach {
-        println(it)
-    } */
+    /* n.forEach(::println) */
     println()
 }
 
