@@ -2,28 +2,27 @@ import java.util.ArrayList;
 
 public class PathInTree {
 
-    ArrayList<ArrayList<Integer>> res = new ArrayList<>();
-
     ArrayList<ArrayList<Integer>> path(BinaryTree root, int sum) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
         if (root == null || sum <= 0) {
             return res;
         }
-        path(root, sum, new ArrayList<>());
+        path(root, sum, new ArrayList<>(), res);
         return res;
     }
 
-    void path(BinaryTree tree, int sum, ArrayList<Integer> path) {
+    void path(BinaryTree tree, int target, ArrayList<Integer> path,
+            ArrayList<ArrayList<Integer>> res) {
         if (tree == null) {
             return;
         }
         path.add(tree.value);
-        int target = sum;
         target -= tree.value;
         if (target == 0 && tree.left == null && tree.right == null) {
             res.add(new ArrayList<>(path));
         } else {
-            path(tree.left, target, path);
-            path(tree.right, target, path);
+            path(tree.left, target, path, res);
+            path(tree.right, target, path, res);
         }
         path.remove(path.size() - 1);
     }
@@ -45,8 +44,29 @@ public class PathInTree {
         connectBT(b, b2, b3);
         connectBT(b2, b4, b5);
         connectBT(b3, b6, b7);
-        System.out.println(p.path(b, 7));
-        System.out.println(p.path(b, 6));
+        System.out.println(p.path(b, 12));
+        // System.out.println(p.path(b, 17));
+
+        BinaryTree a = new BinaryTree(1);
+        BinaryTree a2 = new BinaryTree(2);
+        BinaryTree a3 = new BinaryTree(3);
+        BinaryTree a4 = new BinaryTree(4);
+        connectBT(a, a2, null);
+        connectBT(a2, a3, null);
+        connectBT(a3, a4, null);
+        System.out.println(p.path(a, 10));
+
+        BinaryTree c = new BinaryTree(5);
+        BinaryTree c2 = new BinaryTree(9);
+        BinaryTree c3 = new BinaryTree(2);
+        BinaryTree c4 = new BinaryTree(1);
+        connectBT(c, null, c2);
+        connectBT(c2, null, c3);
+        connectBT(c3, null, c4);
+        System.out.println(p.path(c, 17));
+
+        BinaryTree d = new BinaryTree(88);
+        System.out.println(p.path(d, 88));
     }
 }
 
