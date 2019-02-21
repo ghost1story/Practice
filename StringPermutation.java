@@ -14,12 +14,14 @@ public class StringPermutation {
         return res;
     }
 
-    void getString(char[] c, boolean[] isUsed, StringBuilder sb, ArrayList<> res) {
+    void getString(char[] c, boolean[] isUsed, StringBuilder sb, ArrayList res) {
         if (sb.length() == c.length) {
             res.add(sb.toString());
             return;
         }
         for (int i = 0; i < isUsed.length; i++) {
+            System.out.println(i);
+            System.out.println(c[i]);
             if (isUsed[i]) {
                 continue;
             }
@@ -28,17 +30,20 @@ public class StringPermutation {
             }
             sb.append(c[i]);
             isUsed[i] = true;
+            System.out.println("before sb " + sb);
             getString(c, isUsed, sb, res);
             sb.deleteCharAt(sb.length() - 1);
+            System.out.println("sb after " + sb);
             isUsed[i] = false;
         }
     }
 
     public static void main(String[] args) {
         StringPermutation s = new StringPermutation();
-        System.out.println(s.getString("a"));
-        System.out.println(s.getString("ab"));
+        // System.out.println(s.getString("a"));
+        // System.out.println(s.getString("ab"));
         System.out.println(s.getString("abb"));
-        System.out.println(s.getString("abc"));
+        // System.out.println(s.getString("abc"));
+        // System.out.println(s.getString(""));
     }
 }
