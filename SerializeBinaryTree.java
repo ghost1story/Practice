@@ -7,6 +7,37 @@ public class SerializeBinaryTree {
         root.right = right;
     }
 
+    /* public static void printTree(BinaryTree root) {
+	    printTreeNode(root);
+	    if (root != null) {
+	        if (root.left != null) {
+                printTree(root.left);
+            }
+	        if (root.right != null) {
+                printTree(root.right);
+            }
+	    }
+	}
+
+	public static void printTreeNode(BinaryTree node) {
+	    if (node != null) {
+	        System.out.println("node is: " + node.value);
+	        if (node.left != null) {
+                System.out.println("left child is: " + node.left.value);
+            } else {
+                System.out.println("left child is null");
+            }
+	        if (node.right != null) {
+                System.out.println("right child is: " + node.right.value);
+            } else {
+                System.out.println("right child is null");
+            }
+	    } else {
+	        System.out.println("node is null");
+	    }
+	    System.out.println();
+	} */
+
     String serialize(BinaryTree t) {
         if (t == null) {
             return "#";
@@ -20,9 +51,15 @@ public class SerializeBinaryTree {
     }
 
     BinaryTree deserialize() {
+        if (res.length() == 0) {
+            return null;
+        }
         int index = res.indexOf(" ");
-        String s = index == -1 ? null : res.substring(0, index);
-        res = index == -1 ? "" : res.substring(index + 1, res.length());
+        String s = index == -1 ? res : res.substring(0, index);
+        res = index == -1 ? "" : res.substring(index + 1);
+        if (s.equals("#")) {
+            return null;
+        }
         int value = Integer.parseInt(s);
         BinaryTree b = new BinaryTree(value);
         b.left = deserialize();
@@ -35,11 +72,9 @@ public class SerializeBinaryTree {
     }
 
     static void printTree(BinaryTree root) {
-        while (root != null) {
+        if (root != null) {
             System.out.println("value is " + root.value);
-            System.out.print("left ");
             printTree(root.left);
-            System.out.print("right ");
             printTree(root.right);
         }
     }
