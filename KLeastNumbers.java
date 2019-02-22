@@ -7,17 +7,22 @@ public class KLeastNumbers {
         if (num == null || num.length < 1 || k == 0) {
             return res;
         }
+        findSmall(num, k - 1);
+        for (int i = 0; i < k; i++) {
+            res.add(num[i]);
+        }
+        return res;
     }
 
     void findSmall(int[] num, int k) {
         int i = 0;
-        int j = k;
+        int j = num.length - 1;
         while (i < j) {
             int n = partition(num, i, j);
             if (n == k) {
                 break;
             } else if (n < k) {
-                j = n + 1;
+                i = n + 1;
             } else {
                 j = n - 1;
             }
