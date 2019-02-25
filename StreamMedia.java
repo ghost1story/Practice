@@ -24,4 +24,18 @@ public class StreamMedia {
             return right.peek();
         }
     }
+
+    public static void main(String[] args) {
+        StreamMedia s = new StreamMedia();
+        s.insert(5);
+        System.out.println(s.getMedia());
+        s.insert(9);
+        System.out.println(s.getMedia());
+        s.insert(3);
+        System.out.println(s.getMedia());
+        s.insert(2);
+        System.out.println(s.getMedia());        
+        s.insert(4);
+        System.out.println(s.getMedia());
+    }
 }
