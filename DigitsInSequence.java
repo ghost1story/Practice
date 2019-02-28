@@ -8,22 +8,30 @@ public class DigitsInSequence {
         int bound = 10;
         int len = 2;
         while (cur + getLength(len) < index) {
+            System.out.println("cur: " + cur + " len: " + len + " bound: " + bound);
             cur += getLength(len);
             len++;
             bound *= 10;
         }
-        int curDigit = cur + (index - bound) / len + "";
-        return Integer.toString(curDigit).charAt(index - bound - curDigit * 3) - '0';
+        int curDigit = bound + (index - cur) / len;
+        return Integer.toString(curDigit).charAt(
+            index - cur - (curDigit - bound) * len) - '0';
     }
 
     int getLength(int len) {
-        if (len == 1) {
-            return 10;
+        int res = 9;
+        for (int i = 1; i < len; i++) {
+            res *= 10;
         }
-        int j = 0;
-        for (int i = 0; i < len; i++) {
-            j = Math.pow(9, i - 1);
-        }
-        return j * len;
+        return res * len;
+    }
+
+    public static void main(String[] args) {
+        DigitsInSequence d = new DigitsInSequence();
+        System.out.println(d.getDigit(189));
+        System.out.println(d.getDigit(0));
+        System.out.println(d.getDigit(1));
+        System.out.println(d.getDigit(9));
+        System.out.println(d.getDigit(1001));
     }
 }
