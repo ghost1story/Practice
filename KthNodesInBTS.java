@@ -6,9 +6,10 @@ public class KthNodesInBTS {
 
     int get(BinaryTree root, int k) {
         if (root == null || k <= 0) return -1;
-        ArrayList<Integer> list = new ArrayList<>();
-        inOrderTree(root, list);
-        return k > list.size() ? -1 : list.get(list.size() - k);
+        // ArrayList<Integer> list = new ArrayList<>();
+        // inOrderTree(root, k);
+        // return k > list.size() ? -1 : list.get(list.size() - k);
+        return inOrderTree(root, k);
     }
 
     void inOrderTree(BinaryTree root, ArrayList<Integer> list) {
@@ -16,6 +17,18 @@ public class KthNodesInBTS {
         inOrderTree(root.left, list);
         list.add(root.value);
         inOrderTree(root.right, list);
+    }
+
+    int inOrderTree(BinaryTree root, int k) {
+        if (root == null) return -1;
+        inOrderTree(root.left, k);
+        if (k == 1) {
+            return root.value;
+        } else {
+            k--;
+        }
+        inOrderTree(root.right, k);
+        return -1;
     }
 
     static void connectBT(BinaryTree root, BinaryTree left, BinaryTree right) {
