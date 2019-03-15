@@ -1,4 +1,4 @@
-public class Two {
+public class NumbersOfSlash {
 
     int getLeastFoot(int x, int y) {
         return Math.min(x, y) + Math.max(x, y) - Math.min(x, y);
@@ -11,7 +11,7 @@ public class Two {
     }
 
     public static void main(String[] args) {
-        Two t = new Two();
+        NumbersOfSlash t = new NumbersOfSlash();
         System.out.println(t.getRes(2, 3, 4));
         System.out.println(t.getRes(7, 7, 9));
         System.out.println(t.getRes(1, 2, 1));
