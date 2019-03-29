@@ -21,5 +21,6 @@ public class BalanceBinaryTree {
         int right = getDeepth(root.right);
         if (Math.abs(left - right) > 1) isBalance = false;
         isBalance = true;
+        return root == null ? 0 : Math.max(getDeepth(root.left), getDeepth(root.right)) + 1;
     }
 }
